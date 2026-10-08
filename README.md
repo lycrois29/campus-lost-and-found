@@ -121,31 +121,45 @@ The REST API communicates with the MongoDB database to store and retrieve applic
 
 ## Screenshots
 
-### Home Page
+### Student Features
 
-_Add screenshot of the application's home page here._
+#### 1. Student Dashboard
 
-![Home Page](screenshots/home.png)
+![Student Dashboard](screenshots/student-dashboard.png)
 
-### Lost-and-Found Items
+#### 2. Browse Lost-and-Found Items
 
-_Add screenshot of the lost-and-found item listing here._
+![Browse Items](screenshots/student-browse.png)
 
-![Lost and Found Items](screenshots/items.png)
-
-### Item Details
-
-_Add screenshot of the item details page here._
+#### 3. Item Details
 
 ![Item Details](screenshots/item-details.png)
 
-### Report Item
-
-_Add screenshot of the report item page here._
+#### 4. Report an Item
 
 ![Report Item](screenshots/report-item.png)
 
----
+#### 5. My Reports
+
+![My Reports](screenshots/my-reports.png)
+
+#### 6. My Claims
+
+![My Claims](screenshots/my-claims.png)
+
+### Admin Features
+
+#### 1. Admin Dashboard
+
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+#### 2. Verify Students
+
+![Verify Students](screenshots/verify-students.png)
+
+#### 3. Manage Campus Reports
+
+![Admin Reports](screenshots/admin-reports.png)
 
 ## Project Structure
 
