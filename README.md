@@ -167,27 +167,123 @@ The REST API communicates with the MongoDB database to store and retrieve applic
 ## Project Structure
 
 ```text
+## Project Structure
+
+The project is organized using the Next.js App Router, reusable React components, MongoDB/Mongoose models, REST API routes, utility functions, and supporting scripts and tests.
+
+```text
 Campus-Lost-and-Found/
 │
-├── app/
-│   ├── api/
-│   ├── ...
+├── app/                          # Next.js App Router pages and API routes
+│   ├── account/                  # User account page
+│   │   └── page.tsx
+│   │
+│   ├── admin/                    # Admin-only pages
+│   │   ├── claims/               # Manage claims
+│   │   │   └── page.tsx
+│   │   ├── reports/              # Manage campus reports
+│   │   │   └── page.tsx
+│   │   └── verify/               # Verify student accounts
+│   │       └── page.tsx
+│   │
+│   ├── api/                      # REST API endpoints
+│   │   ├── admin/
+│   │   ├── auth/
+│   │   ├── categories/
+│   │   ├── claims/
+│   │   └── items/
+│   │
+│   ├── browse/                   # Browse lost-and-found items
+│   │   └── page.tsx
+│   │
+│   ├── claims/                   # User claims
+│   │   └── page.tsx
+│   │
+│   ├── dashboard/                # Main dashboard
+│   │   └── page.tsx
+│   │
+│   ├── items/[id]/               # Individual item details
+│   │   ├── edit/                 # Edit an item
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   │
+│   ├── login/                    # Login page
+│   │   └── page.tsx
+│   │
+│   ├── my-reports/               # User's submitted reports
+│   │   └── page.tsx
+│   │
+│   ├── register/                 # Registration page
+│   │   └── page.tsx
+│   │
+│   ├── reports/new/              # Create a new report
+│   │   └── page.tsx
+│   │
+│   ├── error.tsx                 # Global error UI
+│   ├── globals.css               # Global styles
+│   ├── layout.tsx                # Root application layout
+│   ├── loading.tsx               # Global loading UI
+│   └── page.tsx                  # Landing page
 │
-├── components/
-│   └── ...
+├── components/                   # Reusable React components
+│   ├── AdminDashboard.tsx
+│   ├── AdminRecords.tsx
+│   ├── AppHeader.tsx
+│   ├── AuthProvider.tsx
+│   ├── ClaimForm.tsx
+│   ├── ItemCard.tsx
+│   ├── ItemDetails.tsx
+│   ├── ItemExplorer.tsx
+│   ├── LoadingState.tsx
+│   ├── MyClaims.tsx
+│   ├── MyReports.tsx
+│   ├── Pagination.tsx
+│   ├── ReportForm.tsx
+│   ├── RequireAuth.tsx
+│   ├── StatusBadge.tsx
+│   └── StudentVerification.tsx
 │
-├── models/
-│   └── ...
+├── lib/                          # Shared utilities and application logic
+│   ├── api.ts
+│   ├── auth.ts
+│   ├── client.ts
+│   ├── db.ts
+│   ├── rate-limit.ts
+│   ├── serializers.ts
+│   ├── types.ts
+│   └── validation.ts
 │
-├── public/
-│   └── ...
+├── models/                       # MongoDB/Mongoose data models
+│   ├── Category.ts
+│   ├── Claim.ts
+│   ├── Item.ts
+│   ├── RateLimit.ts
+│   └── User.ts
 │
-├── screenshots/
-│   └── ...
+├── screenshots/                  # Project screenshots for documentation
+│   ├── admin-dashboard.png
+│   ├── admin-reports.png
+│   ├── item-details.png
+│   ├── my-claims.png
+│   ├── my-reports.png
+│   ├── report-item.png
+│   ├── student-browse.png
+│   ├── student-dashboard.png
+│   └── verify-students.png
 │
-├── README.md
-├── package.json
-└── ...
+├── scripts/                      # Database and project utility scripts
+├── tests/                        # Automated tests
+├── types/                        # TypeScript type definitions
+│
+├── .env.example                 # Example environment variables
+├── .gitignore                   # Git ignore rules
+├── .vercelignore                # Vercel deployment configuration
+├── README.md                    # Project documentation
+├── next-env.d.ts                # Next.js TypeScript declarations
+├── next.config.ts               # Next.js configuration
+├── package-lock.json             # Locked dependency versions
+├── package.json                  # Project dependencies and scripts
+└── tsconfig.json                 # TypeScript configuration
 ```
 
 ---
