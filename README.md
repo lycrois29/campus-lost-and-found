@@ -161,6 +161,9 @@ The REST API communicates with the MongoDB database to store and retrieve applic
 
 ![Admin Reports](screenshots/admin-reports.png)
 
+---
+
+
 ## Project Structure
 
 ```text
