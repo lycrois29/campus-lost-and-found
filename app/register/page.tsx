@@ -1,0 +1,11 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { apiFetch } from "@/lib/client";
+
+export default function RegisterPage() {
+  const [form, setForm] = useState({ name: "", email: "", password: "" }); const [error, setError] = useState(""); const [saving, setSaving] = useState(false); const [submitted, setSubmitted] = useState(false);
+  const submit = async (event: React.FormEvent) => { event.preventDefault(); setSaving(true); setError(""); try { await apiFetch("/api/auth/register", { method: "POST", body: JSON.stringify(form) }); setForm((current) => ({ ...current, password: "" })); setSubmitted(true); } catch (e) { setError(e instanceof Error ? e.message : "Could not create account"); } finally { setSaving(false); } };
+  return <div className="auth-page"><div className="auth-card"><span className="eyebrow">Join the community</span><h1>Create your account</h1>{submitted ? <><p className="alert success">Your account is pending. An administrator must verify your student identity before you can log in.</p><p className="auth-switch"><Link href="/login">Go to login</Link></p></> : <><p>Use your @au.edu email. An administrator will verify new accounts before they can access student features.</p><form onSubmit={submit} className="auth-form"><label className="field"><span>Full name</span><input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" /></label><label className="field"><span>University email</span><input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@au.edu" /></label><label className="field"><span>Password</span><input required minLength={12} type="password" autoComplete="new-password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="At least 12 characters" /></label>{error && <div className="alert error">{error}</div>}<button className="button button-wide" disabled={saving}>{saving ? "Creating…" : "Request an account"}</button></form><p className="auth-switch">Already have an account? <Link href="/login">Log in</Link></p></>}</div></div>;
+}
