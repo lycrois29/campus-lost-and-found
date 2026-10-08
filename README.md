@@ -1,99 +1,196 @@
-# CampusFind — Campus Lost & Found
+# Campus-Lost-and-Found
 
-CampusFind is a complete Next.js + TypeScript + MongoDB lost-and-found application for a university assignment. It uses App Router pages, REST route handlers, Mongoose models, and an HTTP-only JWT cookie for authentication.
+## Team Members
 
-**Team import in progress:** this first commit contains the shared foundation only. The student and admin modules will arrive in separate pull requests. Do not build or deploy this repository until both have been merged; the existing live site is separate.
+| Name | GitHub |
+|---|---|
+| Kesuda | [Kesuda814](https://github.com/Kesuda814) |
+| Thwe Hnin Eain | [lycrois29](https://github.com/lycrois29) |
+| Hein Nyan Swen | [Aitch-137](https://github.com/Aitch-137) |
 
-New student registration accepts `@au.edu` addresses but does **not** prove email ownership. New accounts remain blocked until an Admin verifies the student's identity through an official university channel and approves them at `/admin/verify`. Existing accounts created before this rule remain active and should be reviewed manually. Rotate exposed credentials, establish tested backups, and obtain school privacy approval before using real student records.
+---
 
-## Live deployment
+## Project Description
 
-The application is running at [campus-lost-found-beta-eight.vercel.app](https://campus-lost-found-beta-eight.vercel.app/). Its production environment uses the separate **CampusFind** MongoDB Atlas project and the `campus_lost_found` database. A first Admin account and six starter categories have already been created. The Admin credentials are not stored in this repository. Rotate the previously shared Admin password through `/account` after signing in.
+**Campus-Lost-and-Found** is a web application designed to help university students report, search for, and recover lost items around campus.
 
-The local `.env.local` is **not** populated with the production database secret. To run the site locally against Atlas, add a valid Atlas connection string and a local JWT secret to `.env.local` first. Alternatively, use a local MongoDB server as shown below.
+Students can use the website to report items they have lost or found, browse available lost-and-found posts, and search for items based on relevant information such as the item name, category, and location.
 
-## Requirements
+The main goal of the project is to provide a simple and convenient platform where students can quickly connect with others who may have found their missing belongings. Instead of relying only on physical announcements or messages in different group chats, students can use one centralized platform to manage lost-and-found information.
 
-- Node.js 18.18 or newer
-- MongoDB running locally or a MongoDB Atlas connection string
+The project is developed as a **Proof of Concept (POC) for a potential senior project**, with the aim of demonstrating how a centralized campus lost-and-found system could be developed and expanded in the future.
 
-## Install and configure
+---
 
-From this project folder:
+## Main Features
 
-```powershell
-npm install
-Copy-Item .env.example .env.local
+- Report a lost item
+- Report a found item
+- Browse lost-and-found items
+- Search for items
+- View detailed information about an item
+- Update item information
+- Delete item records
+- Manage lost-and-found data through REST API
+- Store application data using MongoDB
+
+---
+
+## Technology Stack
+
+### Frontend
+
+- Next.js
+- React
+- HTML
+- CSS
+
+### Backend
+
+- Next.js
+- REST API
+- Node.js
+
+### Database
+
+- MongoDB
+
+The project uses **Next.js and MongoDB** as required by the project specification. The backend is implemented using REST API endpoints for CRUD operations.
+
+---
+
+## Data Models
+
+The system uses multiple entities to organize the application's data.
+
+### 1. Item
+
+Stores information about lost or found items.
+
+Example information includes:
+
+- Item name
+- Category
+- Description
+- Location
+- Status
+- Date
+- Contact information
+
+### 2. User
+
+Stores information about users who create lost-and-found posts.
+
+Example information includes:
+
+- Name
+- Email
+- Contact information
+
+### 3. Report
+
+Stores information related to lost-and-found reports.
+
+Example information includes:
+
+- Report type
+- Item
+- User
+- Location
+- Date
+- Description
+
+These entities are managed through REST API operations including **Create, Read, Update, and Delete (CRUD)**.
+
+---
+
+## REST API
+
+The application provides REST API endpoints for managing the application's data.
+
+The API supports CRUD operations such as:
+
+- **GET** - Retrieve data
+- **POST** - Create new data
+- **PUT/PATCH** - Update existing data
+- **DELETE** - Remove data
+
+The REST API communicates with the MongoDB database to store and retrieve application data.
+
+---
+
+## Screenshots
+
+### Home Page
+
+_Add screenshot of the application's home page here._
+
+![Home Page](screenshots/home.png)
+
+### Lost-and-Found Items
+
+_Add screenshot of the lost-and-found item listing here._
+
+![Lost and Found Items](screenshots/items.png)
+
+### Item Details
+
+_Add screenshot of the item details page here._
+
+![Item Details](screenshots/item-details.png)
+
+### Report Item
+
+_Add screenshot of the report item page here._
+
+![Report Item](screenshots/report-item.png)
+
+---
+
+## Project Structure
+
+```text
+Campus-Lost-and-Found/
+│
+├── app/
+│   ├── api/
+│   ├── ...
+│
+├── components/
+│   └── ...
+│
+├── models/
+│   └── ...
+│
+├── public/
+│   └── ...
+│
+├── screenshots/
+│   └── ...
+│
+├── README.md
+├── package.json
+└── ...
 ```
 
-Open `.env.local` and set:
+---
 
-```env
-MONGODB_URI=mongodb://127.0.0.1:27017/campus_lost_found
-JWT_SECRET=replace-with-a-long-random-secret
-STUDENT_EMAIL_DOMAIN=au.edu
-ADMIN_NAME=Campus Administrator
-ADMIN_EMAIL=admin@campus.local
-ADMIN_PASSWORD=replace-with-a-unique-password-of-at-least-12-characters
-```
+## Purpose as a Senior Project POC
 
-For MongoDB Atlas, replace `MONGODB_URI` with your Atlas connection string. Do not commit `.env.local` or place real secrets in `.env.example`.
+This project serves as a Proof of Concept for a potential senior project.
 
-## Create the first admin account
+The current system focuses on the core functionality required for a campus lost-and-found platform. In a future version, the system could be expanded with additional features such as improved search, notifications, authentication, image uploading, item matching, and more advanced user management.
 
-The seed is idempotent: it creates the admin if missing, updates the configured admin password if it already exists, and ensures starter categories exist. The live deployment's Admin account already exists; only run this command against it if you intentionally want to change that account's password.
+The project demonstrates how a web-based system can be designed to solve a practical problem within a university environment using a modern web technology stack.
 
-```powershell
-npm run seed:admin
-```
+---
 
-The admin can then log in through the normal `/login` page using `ADMIN_EMAIL` and `ADMIN_PASSWORD`.
+## Team
 
-## Deploy directly to Vercel
+This project was developed as a group project by:
 
-This project can be deployed without a Git repository. Create a MongoDB Atlas cluster and database user, then add the production environment variables to the linked Vercel project:
+- **Kesuda**
+- **Thwe Hnin Eain**
+- **Hein Nyan Swen**
 
-```powershell
-vercel env add MONGODB_URI production --sensitive
-vercel env add JWT_SECRET production --sensitive
-vercel deploy --prod
-```
-
-The Atlas network access list must allow the deployed app to connect. Seed the first admin and starter categories against the same Atlas connection by setting `MONGODB_URI`, `ADMIN_NAME`, `ADMIN_EMAIL`, and `ADMIN_PASSWORD` locally, then running `npm run seed:admin`. Do not upload the admin password to Vercel; it is only used by the seed command. For a direct CLI deployment, install Vercel CLI with `npm install -g vercel` and run `vercel login` and `vercel link` first.
-
-## Run locally
-
-```powershell
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
-## Verify and run production mode
-
-```powershell
-npm run lint
-npm test
-npm run build
-npm start
-```
-
-## Main routes
-
-- `/` — landing page
-- `/browse` — public approved-item search and filters
-- `/dashboard` — student workspace
-- `/reports/new` — create a lost/found report
-- `/my-reports` — edit or delete your reports
-- `/claims` — submit tracking and status for claims
-- `/admin` — admin dashboard for reports, claims, categories, users, and statistics
-
-## REST API groups
-
-The Admin can verify students at `/admin/verify`, review all paginated reports at `/admin/reports`, review all paginated claims at `/admin/claims`, and change their password at `/account`.
-
-- `/api/auth/*` — register, login, logout, and current session
-- `/api/items` and `/api/items/:id` — item CRUD and moderation status
-- `/api/claims` and `/api/claims/:id` — claim CRUD and review status
-- `/api/categories` and `/api/categories/:id` — category CRUD
-- `/api/admin/stats` and `/api/admin/users/*` — admin-only statistics and user management
+The project was developed collaboratively, with each team member responsible for different parts of the application.
