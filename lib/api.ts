@@ -17,5 +17,8 @@ export function jsonOk<T>(data: T, status = 200) {
 
 export function assertSameOrigin(request: Request) {
   const origin = request.headers.get("origin");
-  if (!origin || origin !== new URL(request.url).origin) throw new AuthError("Invalid request origin.", 403);
+  const expectedOrigin = process.env.APP_ORIGIN
+    ? new URL(process.env.APP_ORIGIN).origin
+    : new URL(request.url).origin;
+  if (!origin || origin !== expectedOrigin) throw new AuthError("Invalid request origin.", 403);
 }

@@ -41,3 +41,17 @@ test("mutation origin check rejects cross-site and missing origins", () => {
   assert.throws(() => assertSameOrigin(new Request("https://campus.example/api/items", { method: "POST", headers: { origin: "https://attacker.example" } })));
   assert.throws(() => assertSameOrigin(new Request("https://campus.example/api/items", { method: "POST" })));
 });
+
+test("mutation origin check allows the configured public origin behind a proxy", () => {
+  const originalOrigin = process.env.APP_ORIGIN;
+  process.env.APP_ORIGIN = "https://campus.example";
+  try {
+    const internalUrl = "http://127.0.0.1:3000/api/auth/login";
+    assert.doesNotThrow(() => assertSameOrigin(new Request(internalUrl, { method: "POST", headers: { origin: "https://campus.example" } })));
+    assert.throws(() => assertSameOrigin(new Request(internalUrl, { method: "POST", headers: { origin: "https://attacker.example", "x-forwarded-host": "campus.example" } })));
+    assert.throws(() => assertSameOrigin(new Request(internalUrl, { method: "POST" })));
+  } finally {
+    if (originalOrigin === undefined) delete process.env.APP_ORIGIN;
+    else process.env.APP_ORIGIN = originalOrigin;
+  }
+});
